@@ -1,0 +1,48 @@
+{
+  "name": "react-fzf",
+  "version": "0.0.1",
+  "license": "MIT",
+  "description": "",
+  "author": "HiDeoo <github@hideoo.dev> (https://hideoo.dev)",
+  "type": "module",
+  "main": "./dist/react-fzf.umd.cjs",
+  "module": "./dist/react-fzf.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/react-fzf.js",
+      "require": "./dist/react-fzf.umd.cjs"
+    }
+  },
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "tsc && vite build",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "5.16.5",
+    "@testing-library/react": "13.4.0",
+    "@types/node": "18.11.9",
+    "@types/react": "18.0.25",
+    "@vitejs/plugin-react": "2.2.0",
+    "happy-dom": "7.7.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "typescript": "4.9.3",
+    "vite": "3.2.4",
+    "vite-plugin-dts": "1.7.1",
+    "vitest": "0.25.2"
+  },
+  "packageManager": "pnpm@7.17.0",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "keywords": [],
+  "homepage": "https://github.com/HiDeoo/react-fzf",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HiDeoo/react-fzf.git"
+  },
+  "bugs": "https://github.com/HiDeoo/react-fzf/issues"
+}
