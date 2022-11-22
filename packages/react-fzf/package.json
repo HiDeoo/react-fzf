@@ -33,6 +33,9 @@
     "vite-plugin-dts": "1.7.1",
     "vitest": "0.25.2"
   },
+  "peerDependencies": {
+    "react": ">=16"
+  },
   "packageManager": "pnpm@7.17.0",
   "sideEffects": false,
   "files": [
