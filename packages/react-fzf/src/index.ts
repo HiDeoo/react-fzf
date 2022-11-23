@@ -1,2 +1,2 @@
-export { RenameMe } from './RenameMe'
+export { FzfResult } from './FzfResult'
 export { useFzf } from './useFzf'

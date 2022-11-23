@@ -26,5 +26,8 @@ export default defineConfig({
   test: {
     css: false,
     environment: 'happy-dom',
+    // This is required for React Testing Library to automatically cleanup the DOM.
+    // https://github.com/vitest-dev/vitest/issues/682
+    globals: true,
   },
 })

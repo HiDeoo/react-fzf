@@ -6,6 +6,7 @@
   "author": "HiDeoo <github@hideoo.dev> (https://hideoo.dev)",
   "type": "module",
   "scripts": {
+    "dev": "pnpm --parallel --filter \"@react-fzf/example-basic...\" dev",
     "lint": "prettier -c . && eslint . --cache --max-warnings=0 && tsc --noEmit",
     "test": "pnpm -r test -- --run",
     "prepare": "husky install"

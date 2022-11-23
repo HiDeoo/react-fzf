@@ -47,11 +47,14 @@ importers:
 
   packages/react-fzf:
     specifiers:
+      '@testing-library/dom': 8.19.0
       '@testing-library/jest-dom': 5.16.5
       '@testing-library/react': 13.4.0
+      '@testing-library/user-event': 14.4.3
       '@types/node': 18.11.9
       '@types/react': 18.0.25
       '@vitejs/plugin-react': 2.2.0
+      fzf: 0.5.1
       happy-dom: 7.7.0
       react: 18.2.0
       react-dom: 18.2.0
@@ -59,9 +62,13 @@ importers:
       vite: 3.2.4
       vite-plugin-dts: 1.7.1
       vitest: 0.25.2
+    dependencies:
+      fzf: 0.5.1
     devDependencies:
+      '@testing-library/dom': 8.19.0
       '@testing-library/jest-dom': 5.16.5
       '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
+      '@testing-library/user-event': 14.4.3_aaq3sbffpfe3jnxzm2zngsddei
       '@types/node': 18.11.9
       '@types/react': 18.0.25
       '@vitejs/plugin-react': 2.2.0_vite@3.2.4
@@ -712,6 +719,15 @@ packages:
       '@types/react-dom': 18.0.9
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+    dev: true
+
+  /@testing-library/user-event/14.4.3_aaq3sbffpfe3jnxzm2zngsddei:
+    resolution: {integrity: sha512-kCUc5MEwaEMakkO5x7aoD+DLi02ehmEM2QCGWvNqAS1dV/fAvORWEjnjsEIvml59M7Y5kCkWN6fCCyPOe8OL6Q==}
+    engines: {node: '>=12', npm: '>=6'}
+    peerDependencies:
+      '@testing-library/dom': '>=7.21.4'
+    dependencies:
+      '@testing-library/dom': 8.19.0
     dev: true
 
   /@ts-morph/common/0.17.0:
@@ -2346,6 +2362,10 @@ packages:
   /functions-have-names/1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
     dev: true
+
+  /fzf/0.5.1:
+    resolution: {integrity: sha512-AJ9BBt/3K/IyCF+pQjdG194kVSS1hU/v/RnZgiCtYZzA0rj2OBVwwjBRUOclo9yJl2ovjtdw3C31/8/rnT0uug==}
+    dev: false
 
   /gensync/1.0.0-beta.2:
     resolution: {integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==}

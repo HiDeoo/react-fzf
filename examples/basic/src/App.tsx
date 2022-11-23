@@ -1,15 +1,13 @@
-import { RenameMe, useFzf } from 'react-fzf'
+import './App.css'
+import { WithObjects } from './WithObjects'
+import { WithStrings } from './WithStrings'
 
 function App() {
-  const { increment, value } = useFzf()
-
   return (
-    <div>
-      <RenameMe />
-      <div>
-        <button onClick={() => increment()}>Count is {value}.</button>
-      </div>
-    </div>
+    <>
+      <WithStrings />
+      <WithObjects />
+    </>
   )
 }
 
