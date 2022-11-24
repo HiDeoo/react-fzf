@@ -9,6 +9,7 @@
     "dev": "pnpm --parallel --filter \"@react-fzf/example-basic...\" dev",
     "lint": "prettier -c . && eslint . --cache --max-warnings=0 && tsc --noEmit",
     "test": "pnpm -r test -- --run",
+    "typecheck": "pnpm -r typecheck --run",
     "prepare": "husky install"
   },
   "devDependencies": {

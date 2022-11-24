@@ -27,8 +27,6 @@ const vehicles = [
   { name: 'Submarine', environment: 'water' },
 ]
 
-// TODO(HiDeoo) Test `itemToString` UseFzfOptions type
-
 test('should return all items for an empty query', () => {
   const { result } = renderHook(() => useFzf({ items: animals, query: '' }))
 
