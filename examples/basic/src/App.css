@@ -6,3 +6,8 @@ fieldset {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
+
+input,
+select {
+  margin-inline: 0.3rem 0.8rem;
+}

@@ -1,41 +1,56 @@
 import { Fzf, type FzfResultItem } from 'fzf'
 import { type ArrayElement, type SyncOptsToUse } from 'fzf/dist/types/finders'
+import { type SyncOptions, type Tiebreaker } from 'fzf/dist/types/types'
 import { useMemo } from 'react'
 
 export function useFzf<TItems extends readonly unknown[]>({
   items,
   itemToString,
   query,
+  ...fzfOptions
 }: UseFzfOptions<TItems>): UseFzfResults<TItems> {
   const fzf = useMemo(() => {
-    // TODO(HiDeoo) Support fzf options
-    // TODO(HiDeoo) Support updating fzf options
-    const options: SyncOptsToUse<ArrayElement<TItems>> = {}
+    const options: SyncOptsToUse<ArrayElement<TItems>> = fzfOptions
 
     if (itemToString) {
       options.selector = itemToString
     }
 
     // @ts-expect-error - fzf options type does not support generics.
-    return new Fzf(items, options)
-  }, [items, itemToString])
+    return new Fzf(items, fzfOptions)
+  }, [fzfOptions, items, itemToString])
 
   return useMemo(() => {
     return fzf.find(query).map((result) => {
       return {
         ...result,
-        characters: [...(typeof result.item === 'string' ? result.item : itemToString(result.item))],
+        characters: [...(itemToString || typeof result.item !== 'string' ? itemToString(result.item) : result.item)],
       }
     })
   }, [fzf, itemToString, query])
 }
 
-type UseFzfOptions<TItems extends readonly unknown[]> = {
+// Omitting `selector` (renamed to `itemToString`) breaks `sort` and `tiebreakers`.
+export type FzfOptions<TItems extends readonly unknown[]> = Partial<
+  Omit<SyncOptions<ArrayElement<TItems>>, 'selector' | 'sort' | 'tiebreakers'>
+> &
+  (
+    | {
+        sort?: true
+        tiebreakers?: Tiebreaker<ArrayElement<TItems>>[]
+      }
+    | {
+        sort: false
+      }
+  ) &
+  (TItems extends string[]
+    ? { itemToString?: ItemToString<string> }
+    : { itemToString: ItemToString<ArrayElement<TItems>> })
+
+export type UseFzfOptions<TItems extends readonly unknown[]> = {
   items: TItems
   query: string
-} & (TItems extends string[]
-  ? { itemToString?: ItemToString<string> }
-  : { itemToString: ItemToString<ArrayElement<TItems>> })
+} & FzfOptions<TItems>
 
 type UseFzfResults<TItems extends readonly unknown[]> = UseFzfResult<ArrayElement<TItems>>[]
 

@@ -33,7 +33,10 @@ export function WithObjects() {
   return (
     <fieldset>
       <legend>with objects</legend>
-      <input type="text" placeholder="filter…" value={filter} onChange={(event) => setFilter(event.target.value)} />
+      <label>
+        query:
+        <input type="text" placeholder="filter…" value={filter} onChange={(event) => setFilter(event.target.value)} />
+      </label>
       <div className="example">
         <fieldset>
           <legend>input</legend>

@@ -169,6 +169,30 @@ test('should support filtering non-string items', () => {
   expect(result.current).toHaveLength(0)
 })
 
+test('should use `itemToString` if provided even for string items', () => {
+  const initialProps = {
+    items: animals,
+    itemToString(item: typeof animals[number]) {
+      return item.toUpperCase()
+    },
+    query: '',
+  }
+
+  const { result, rerender } = renderHook((props) => useFzf(props), {
+    initialProps: initialProps,
+  })
+
+  expect(result.current).toHaveLength(animals.length)
+  expect(result.current).toEqual(resultsContaining(animals))
+
+  rerender({ ...initialProps, query: 'do' })
+
+  expect(result.current).toHaveLength(1)
+  expect(result.current).toEqual(
+    expect.arrayContaining([expect.objectContaining({ item: 'Dog', characters: ['D', 'O', 'G'] })])
+  )
+})
+
 test('should add the characters lists to non-string results', () => {
   const { result } = renderHook(() =>
     useFzf({
