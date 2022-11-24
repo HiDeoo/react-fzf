@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { useState } from 'react'
+import { type ComponentPropsWithoutRef, type ElementType, useState } from 'react'
 import { expect, test } from 'vitest'
 
 import { FzfResult } from './FzfResult'
@@ -19,7 +19,7 @@ const chemicalElements = [
   'Neon',
 ]
 
-function Search() {
+function Search<TElement extends ElementType>(props: ComponentPropsWithoutRef<TElement>) {
   const [query, setQuery] = useState('')
 
   const results = useFzf({ items: chemicalElements, query })
@@ -30,7 +30,7 @@ function Search() {
       <ul>
         {results.map((result) => (
           <li key={result.item}>
-            <FzfResult result={result} />
+            <FzfResult result={result} {...props} />
           </li>
         ))}
       </ul>
@@ -178,6 +178,41 @@ test('should render highlighted results matching a query', async () => {
         <strong>
           m
         </strong>
+      </li>,
+    ]
+  `)
+})
+
+test('should render highlighted results matching a query with custom tags & props', async () => {
+  render(<Search as="mark" className="highlight" />)
+
+  screen.getByPlaceholderText('filter').focus()
+
+  const user = userEvent.setup()
+  await user.keyboard('ll')
+
+  const results = screen.getAllByRole('listitem')
+
+  expect(results).toMatchInlineSnapshot(`
+    [
+      <li>
+        B
+        e
+        r
+        y
+        <mark
+          class="highlight"
+        >
+          l
+        </mark>
+        <mark
+          class="highlight"
+        >
+          l
+        </mark>
+        i
+        u
+        m
       </li>,
     ]
   `)
