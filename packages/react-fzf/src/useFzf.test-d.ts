@@ -1,71 +1,75 @@
 import { byLengthAsc, byStartAsc } from 'fzf'
-import { type ArrayElement } from 'fzf/dist/types/finders'
 import { type SyncOptions } from 'fzf/dist/types/types'
 import { assertType, expectTypeOf, test } from 'vitest'
 
 import { useFzf, type UseFzfOptions, type UseFzfResult } from './useFzf'
 
-type Strings = string[]
-type Objects = { name: string }[]
+type StringItem = string
+
+interface ObjectItem {
+  name: string
+}
 
 test('should always expect a list of items and a query', () => {
-  expectTypeOf<UseFzfOptions<Strings>>().toHaveProperty('items').toEqualTypeOf<Strings>()
-  expectTypeOf<UseFzfOptions<Objects>>().toHaveProperty('items').toEqualTypeOf<Objects>()
+  expectTypeOf<UseFzfOptions<StringItem>>().toHaveProperty('items').toEqualTypeOf<StringItem[]>()
+  expectTypeOf<UseFzfOptions<ObjectItem>>().toHaveProperty('items').toEqualTypeOf<ObjectItem[]>()
 
-  expectTypeOf<UseFzfOptions<Strings>>().toHaveProperty('query').toEqualTypeOf<string>()
-  expectTypeOf<UseFzfOptions<Objects>>().toHaveProperty('query').toEqualTypeOf<string>()
+  expectTypeOf<UseFzfOptions<StringItem>>().toHaveProperty('query').toEqualTypeOf<string>()
+  expectTypeOf<UseFzfOptions<ObjectItem>>().toHaveProperty('query').toEqualTypeOf<string>()
 })
 
 test('should optionally expect the itemToString option for a list of string items', () => {
-  expectTypeOf<UseFzfOptions<Strings>>()
+  expectTypeOf<UseFzfOptions<StringItem>>()
     .toHaveProperty('itemToString')
     .toEqualTypeOf<Optional<(item: string) => string>>()
 })
 
 test('should expect the itemToString option for a list of non-string items', () => {
-  expectTypeOf<UseFzfOptions<Objects>>()
-    .toHaveProperty('itemToString')
-    .toEqualTypeOf<(item: Objects[number]) => string>()
+  expectTypeOf<UseFzfOptions<ObjectItem>>().toHaveProperty('itemToString').toEqualTypeOf<(item: ObjectItem) => string>()
 })
 
 test('should optionally expect the casing option', () => {
-  expectTypeOf<UseFzfOptions<Strings>>().toHaveProperty('casing').toEqualTypeOf<FzfOptions<Strings, 'casing'>>()
-  expectTypeOf<UseFzfOptions<Objects>>().toHaveProperty('casing').toEqualTypeOf<FzfOptions<Objects, 'casing'>>()
+  expectTypeOf<UseFzfOptions<StringItem>>().toHaveProperty('casing').toEqualTypeOf<FzfOptions<StringItem, 'casing'>>()
+  expectTypeOf<UseFzfOptions<ObjectItem>>().toHaveProperty('casing').toEqualTypeOf<FzfOptions<ObjectItem, 'casing'>>()
 })
 
 test('should optionally expect the forward option', () => {
-  expectTypeOf<UseFzfOptions<Strings>>().toHaveProperty('forward').toEqualTypeOf<FzfOptions<Strings, 'forward'>>()
-  expectTypeOf<UseFzfOptions<Objects>>().toHaveProperty('forward').toEqualTypeOf<FzfOptions<Objects, 'forward'>>()
+  expectTypeOf<UseFzfOptions<StringItem>>().toHaveProperty('forward').toEqualTypeOf<FzfOptions<StringItem, 'forward'>>()
+  expectTypeOf<UseFzfOptions<ObjectItem>>().toHaveProperty('forward').toEqualTypeOf<FzfOptions<ObjectItem, 'forward'>>()
 })
 
 test('should optionally expect the fuzzy option', () => {
-  expectTypeOf<UseFzfOptions<Strings>>().toHaveProperty('fuzzy').toEqualTypeOf<FzfOptions<Strings, 'fuzzy'>>()
-  expectTypeOf<UseFzfOptions<Objects>>().toHaveProperty('fuzzy').toEqualTypeOf<FzfOptions<Objects, 'fuzzy'>>()
+  expectTypeOf<UseFzfOptions<StringItem>>().toHaveProperty('fuzzy').toEqualTypeOf<FzfOptions<StringItem, 'fuzzy'>>()
+  expectTypeOf<UseFzfOptions<ObjectItem>>().toHaveProperty('fuzzy').toEqualTypeOf<FzfOptions<ObjectItem, 'fuzzy'>>()
 })
 
 test('should optionally expect the limit option', () => {
-  expectTypeOf<UseFzfOptions<Strings>>().toHaveProperty('limit').toEqualTypeOf<FzfOptions<Strings, 'limit'>>()
-  expectTypeOf<UseFzfOptions<Objects>>().toHaveProperty('limit').toEqualTypeOf<FzfOptions<Objects, 'limit'>>()
+  expectTypeOf<UseFzfOptions<StringItem>>().toHaveProperty('limit').toEqualTypeOf<FzfOptions<StringItem, 'limit'>>()
+  expectTypeOf<UseFzfOptions<ObjectItem>>().toHaveProperty('limit').toEqualTypeOf<FzfOptions<ObjectItem, 'limit'>>()
 })
 
 test('should optionally expect the match option', () => {
-  expectTypeOf<UseFzfOptions<Strings>>().toHaveProperty('match').toEqualTypeOf<FzfOptions<Strings, 'match'>>()
-  expectTypeOf<UseFzfOptions<Objects>>().toHaveProperty('match').toEqualTypeOf<FzfOptions<Objects, 'match'>>()
+  expectTypeOf<UseFzfOptions<StringItem>>().toHaveProperty('match').toEqualTypeOf<FzfOptions<StringItem, 'match'>>()
+  expectTypeOf<UseFzfOptions<ObjectItem>>().toHaveProperty('match').toEqualTypeOf<FzfOptions<ObjectItem, 'match'>>()
 })
 
 test('should optionally expect the normalize option', () => {
-  expectTypeOf<UseFzfOptions<Strings>>().toHaveProperty('normalize').toEqualTypeOf<FzfOptions<Strings, 'normalize'>>()
-  expectTypeOf<UseFzfOptions<Objects>>().toHaveProperty('normalize').toEqualTypeOf<FzfOptions<Objects, 'normalize'>>()
+  expectTypeOf<UseFzfOptions<StringItem>>()
+    .toHaveProperty('normalize')
+    .toEqualTypeOf<FzfOptions<StringItem, 'normalize'>>()
+  expectTypeOf<UseFzfOptions<ObjectItem>>()
+    .toHaveProperty('normalize')
+    .toEqualTypeOf<FzfOptions<ObjectItem, 'normalize'>>()
 })
 
 test('should optionally expect the sort option set to false with no tiebreakers', () => {
-  assertType<UseFzfResult<ArrayElement<Strings>>[]>(useFzf<Strings>({ items: [], query: '' }))
-  assertType<UseFzfResult<ArrayElement<Strings>>[]>(useFzf<Strings>({ items: [], query: '', sort: false }))
+  assertType<UseFzfResult<StringItem>[]>(useFzf<StringItem>({ items: [], query: '' }))
+  assertType<UseFzfResult<StringItem>[]>(useFzf<StringItem>({ items: [], query: '', sort: false }))
   // @ts-expect-error - should not accept a tiebreaker
-  assertType(useFzf<Strings>({ items: [], query: '', sort: false, tiebreakers: [byLengthAsc, byStartAsc] }))
+  assertType(useFzf<StringItem>({ items: [], query: '', sort: false, tiebreakers: [byLengthAsc, byStartAsc] }))
 
-  assertType<UseFzfResult<ArrayElement<Objects>>[]>(
-    useFzf<Objects>({
+  assertType<UseFzfResult<ObjectItem>[]>(
+    useFzf<ObjectItem>({
       items: [],
       itemToString(item) {
         return item.name
@@ -73,8 +77,8 @@ test('should optionally expect the sort option set to false with no tiebreakers'
       query: '',
     })
   )
-  assertType<UseFzfResult<ArrayElement<Objects>>[]>(
-    useFzf<Objects>({
+  assertType<UseFzfResult<ObjectItem>[]>(
+    useFzf<ObjectItem>({
       items: [],
       itemToString(item) {
         return item.name
@@ -84,16 +88,18 @@ test('should optionally expect the sort option set to false with no tiebreakers'
     })
   )
   // @ts-expect-error - should not accept a tiebreaker
-  assertType(useFzf<Objects>({ items: [], query: '', sort: false, tiebreakers: [byLengthAsc, byStartAsc] }))
+  assertType(useFzf<ObjectItem>({ items: [], query: '', sort: false, tiebreakers: [byLengthAsc, byStartAsc] }))
 })
 
 test('should optionally expect the sort option set to false with an optional tiebreaker', () => {
-  assertType<UseFzfResult<ArrayElement<Strings>>[]>(useFzf<Strings>({ items: [], query: '' }))
-  assertType<UseFzfResult<ArrayElement<Strings>>[]>(useFzf<Strings>({ items: [], query: '', sort: true }))
-  assertType(useFzf<Strings>({ items: [], query: '', sort: true, tiebreakers: [byLengthAsc, byStartAsc] }))
+  assertType<UseFzfResult<StringItem>[]>(useFzf<StringItem>({ items: [], query: '' }))
+  assertType<UseFzfResult<StringItem>[]>(useFzf<StringItem>({ items: [], query: '', sort: true }))
+  assertType<UseFzfResult<StringItem>[]>(
+    useFzf<StringItem>({ items: [], query: '', sort: true, tiebreakers: [byLengthAsc, byStartAsc] })
+  )
 
-  assertType<UseFzfResult<ArrayElement<Objects>>[]>(
-    useFzf<Objects>({
+  assertType<UseFzfResult<ObjectItem>[]>(
+    useFzf<ObjectItem>({
       items: [],
       itemToString(item) {
         return item.name
@@ -101,8 +107,8 @@ test('should optionally expect the sort option set to false with an optional tie
       query: '',
     })
   )
-  assertType<UseFzfResult<ArrayElement<Objects>>[]>(
-    useFzf<Objects>({
+  assertType<UseFzfResult<ObjectItem>[]>(
+    useFzf<ObjectItem>({
       items: [],
       itemToString(item) {
         return item.name
@@ -111,8 +117,8 @@ test('should optionally expect the sort option set to false with an optional tie
       sort: true,
     })
   )
-  assertType(
-    useFzf<Objects>({
+  assertType<UseFzfResult<ObjectItem>[]>(
+    useFzf<ObjectItem>({
       items: [],
       itemToString(item) {
         return item.name
@@ -124,8 +130,6 @@ test('should optionally expect the sort option set to false with an optional tie
   )
 })
 
-type FzfOptions<TItems extends readonly unknown[], TOption extends keyof SyncOptions<ArrayElement<TItems>>> = Optional<
-  SyncOptions<ArrayElement<TItems>>[TOption]
->
+type FzfOptions<TItem, TOption extends keyof SyncOptions<TItem>> = Optional<SyncOptions<TItem>[TOption]>
 
 type Optional<TType> = TType | undefined

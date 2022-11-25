@@ -1,15 +1,15 @@
 import { Fzf, type FzfResultItem } from 'fzf'
-import { type ArrayElement, type SyncOptsToUse } from 'fzf/dist/types/finders'
+import { type SyncOptsToUse } from 'fzf/dist/types/finders'
 import { useMemo } from 'react'
 
-export function useFzf<TItems extends readonly unknown[]>({
+export function useFzf<TItem>({
   items,
   itemToString,
   query,
   ...fzfOptions
-}: UseFzfOptions<TItems>): UseFzfResults<TItems> {
+}: UseFzfOptions<TItem>): UseFzfResult<TItem>[] {
   const fzf = useMemo(() => {
-    const options: SyncOptsToUse<ArrayElement<TItems>> = fzfOptions
+    const options: SyncOptsToUse<TItem> = fzfOptions
 
     if (itemToString) {
       options.selector = itemToString
@@ -21,25 +21,29 @@ export function useFzf<TItems extends readonly unknown[]>({
 
   return useMemo(() => {
     return fzf.find(query).map((result) => {
+      let characters = ''
+
+      if (itemToString) {
+        characters = itemToString(result.item)
+      } else if (typeof result.item === 'string') {
+        characters = result.item
+      } else if (typeof result.item !== 'string') {
+        throw new TypeError('react-fzf: the `itemToString` option is required for non-string items.')
+      }
+
       return {
         ...result,
-        characters: [...(itemToString || typeof result.item !== 'string' ? itemToString(result.item) : result.item)],
+        characters: [...characters],
       }
     })
   }, [fzf, itemToString, query])
 }
 
-export type FzfOptions<TItems extends readonly unknown[]> = SyncOptsToUse<ArrayElement<TItems>> &
-  (TItems extends string[]
-    ? { itemToString?: ItemToString<string> }
-    : { itemToString: ItemToString<ArrayElement<TItems>> })
-
-export type UseFzfOptions<TItems extends readonly unknown[]> = {
-  items: TItems
+export type UseFzfOptions<TItem> = {
+  items: TItem[]
   query: string
-} & FzfOptions<TItems>
-
-type UseFzfResults<TItems extends readonly unknown[]> = UseFzfResult<ArrayElement<TItems>>[]
+} & SyncOptsToUse<TItem> &
+  ([TItem] extends [string] ? { itemToString?: ItemToString<TItem> } : { itemToString: ItemToString<TItem> })
 
 export type UseFzfResult<TItem> = FzfResultItem<TItem> & {
   characters: string[]
