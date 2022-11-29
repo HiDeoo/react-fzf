@@ -2,6 +2,8 @@ import { useCombobox } from 'downshift'
 import { useState } from 'react'
 import { FzfHighlight, useFzf } from 'react-fzf'
 
+import { Example } from '../utils/Example'
+
 const colors = [
   { name: 'aqua' },
   { name: 'black' },
@@ -24,12 +26,16 @@ function colorToString(color: Color | null): string {
   return color?.name ?? ''
 }
 
-export function WithObjects() {
+export function WithGenerics() {
+  return <Combobox items={colors} itemToString={colorToString} />
+}
+
+export function Combobox<TItem>({ items, itemToString }: ComboboxProps<TItem>) {
   const [query, setQuery] = useState('')
 
   const { getFzfHighlightProps, results } = useFzf({
-    items: colors,
-    itemToString: colorToString,
+    items,
+    itemToString,
     query,
   })
 
@@ -44,38 +50,37 @@ export function WithObjects() {
     selectedItem,
   } = useCombobox({
     items: results,
-    itemToString: colorToString,
+    itemToString,
     onInputValueChange: ({ inputValue }) => {
       setQuery(inputValue ?? '')
     },
   })
 
   return (
-    <fieldset>
-      <legend>with objects</legend>
-      <label {...getLabelProps()}>
-        query:
-        <input {...getInputProps()} />
-        <button type="button" {...getToggleButtonProps()} aria-label="toggle menu">
-          &#8595;
-        </button>
-      </label>
-      <div className="example">
-        <fieldset>
-          <legend>input</legend>
-          <ul>
-            {colors.map((color) => (
-              <li key={color.name}>{JSON.stringify(color)}</li>
-            ))}
-          </ul>
-        </fieldset>
-        <fieldset>
-          <legend>output</legend>
-          <ul {...getMenuProps()}>
-            {isOpen &&
-              results.map((item, index) => (
+    <Example title="with generics">
+      <Example.Input>
+        <ul>
+          {colors.map((color) => (
+            <li key={color.name}>{JSON.stringify(color)}</li>
+          ))}
+        </ul>
+      </Example.Input>
+      <Example.Output>
+        <label {...getLabelProps()}>
+          query:
+          <input {...getInputProps()} />
+          <button type="button" {...getToggleButtonProps()} aria-label="toggle menu">
+            &#8595;
+          </button>
+        </label>
+        <ul {...getMenuProps({ className: 'menu' })}>
+          {isOpen &&
+            results.map((item, index) => {
+              const itemStr = itemToString(item)
+
+              return (
                 <li
-                  key={`${item.name}${index}`}
+                  key={`${itemStr}${index}`}
                   style={{
                     ...(highlightedIndex === index ? { backgroundColor: 'lightblue' } : {}),
                     ...(selectedItem === item ? { color: 'red' } : {}),
@@ -84,12 +89,17 @@ export function WithObjects() {
                 >
                   <FzfHighlight {...getFzfHighlightProps({ index, item })} />
                 </li>
-              ))}
-          </ul>
-        </fieldset>
-      </div>
-    </fieldset>
+              )
+            })}
+        </ul>
+      </Example.Output>
+    </Example>
   )
+}
+
+interface ComboboxProps<TItem> {
+  items: TItem[]
+  itemToString: (item: TItem | null) => string
 }
 
 interface Color {

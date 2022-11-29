@@ -6,7 +6,7 @@
   "author": "HiDeoo <github@hideoo.dev> (https://hideoo.dev)",
   "type": "module",
   "scripts": {
-    "dev": "pnpm --parallel --filter \"@react-fzf/example-basic...\" dev",
+    "dev": "pnpm --parallel --filter \"@react-fzf/examples...\" dev",
     "lint": "prettier -c . && eslint . --cache --max-warnings=0 && tsc --noEmit",
     "test": "pnpm -r test -- --run",
     "typecheck": "pnpm -r typecheck --run",
@@ -24,6 +24,13 @@
     "typescript": "4.9.3"
   },
   "packageManager": "pnpm@7.17.0",
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "@babel/core"
+      ]
+    }
+  },
   "private": true,
   "sideEffects": false,
   "keywords": [],

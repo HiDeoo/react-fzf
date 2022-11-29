@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { FzfHighlight, useFzf, type UseFzfResults } from 'react-fzf'
 import Select, { components, type GroupBase, type OptionProps } from 'react-select'
 
+import { Example } from '../utils/Example'
+
 const colors = [
   { label: 'Aqua', value: 'aqua' },
   { label: 'Black', value: 'black' },
@@ -28,7 +30,7 @@ export function Option(props: OptionProps<typeof colors[number]>) {
   )
 }
 
-export function WithStringValues() {
+export function WithValues() {
   const [query, setQuery] = useState('')
 
   const { getFzfHighlightProps, results } = useFzf({
@@ -40,14 +42,25 @@ export function WithStringValues() {
   })
 
   return (
-    <Select
-      components={{ Option }}
-      filterOption={() => true}
-      getFzfHighlightProps={getFzfHighlightProps}
-      inputValue={query}
-      onInputChange={setQuery}
-      options={results}
-    />
+    <Example title="with string values">
+      <Example.Input>
+        <ul>
+          {colors.map(({ value }) => (
+            <li key={value}>{value}</li>
+          ))}
+        </ul>
+      </Example.Input>
+      <Example.Output>
+        <Select
+          components={{ Option }}
+          filterOption={() => true}
+          getFzfHighlightProps={getFzfHighlightProps}
+          inputValue={query}
+          onInputChange={setQuery}
+          options={results}
+        />
+      </Example.Output>
+    </Example>
   )
 }
 

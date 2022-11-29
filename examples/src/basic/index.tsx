@@ -1,17 +1,13 @@
-import './App.css'
-
-import { WithGenerics } from './WithGenerics'
 import { WithObjects } from './WithObjects'
+import { WithOptions } from './WithOptions'
 import { WithStrings } from './WithStrings'
 
-function App() {
+export function Basic() {
   return (
     <>
       <WithStrings />
       <WithObjects />
-      <WithGenerics />
+      <WithOptions />
     </>
   )
 }
-
-export default App

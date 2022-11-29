@@ -24,29 +24,9 @@ importers:
       prettier: 2.8.0
       typescript: 4.9.3
 
-  examples/basic:
+  examples:
     specifiers:
-      '@types/react': 18.0.25
-      '@types/react-dom': 18.0.9
-      '@vitejs/plugin-react': 2.2.0
-      react: 18.2.0
-      react-dom: 18.2.0
-      react-fzf: workspace:*
-      typescript: 4.9.3
-      vite: 3.2.4
-    dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      react-fzf: link:../../packages/react-fzf
-    devDependencies:
-      '@types/react': 18.0.25
-      '@types/react-dom': 18.0.9
-      '@vitejs/plugin-react': 2.2.0_vite@3.2.4
-      typescript: 4.9.3
-      vite: 3.2.4
-
-  examples/downshift:
-    specifiers:
+      '@tanstack/react-router': 0.0.1-beta.28
       '@types/react': 18.0.25
       '@types/react-dom': 18.0.9
       '@vitejs/plugin-react': 2.2.0
@@ -54,35 +34,15 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0
       react-fzf: workspace:*
-      typescript: 4.9.3
-      vite: 3.2.4
-    dependencies:
-      downshift: 7.0.4_react@18.2.0
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      react-fzf: link:../../packages/react-fzf
-    devDependencies:
-      '@types/react': 18.0.25
-      '@types/react-dom': 18.0.9
-      '@vitejs/plugin-react': 2.2.0_vite@3.2.4
-      typescript: 4.9.3
-      vite: 3.2.4
-
-  examples/react-select:
-    specifiers:
-      '@types/react': 18.0.25
-      '@types/react-dom': 18.0.9
-      '@vitejs/plugin-react': 2.2.0
-      react: 18.2.0
-      react-dom: 18.2.0
-      react-fzf: workspace:*
       react-select: 5.6.1
       typescript: 4.9.3
       vite: 3.2.4
     dependencies:
+      '@tanstack/react-router': 0.0.1-beta.28_biqbaboplfbrettd7655fr4n2y
+      downshift: 7.0.4_react@18.2.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      react-fzf: link:../../packages/react-fzf
+      react-fzf: link:../packages/react-fzf
       react-select: 5.6.1_2zx2umvpluuhvlq44va5bta2da
     devDependencies:
       '@types/react': 18.0.25
@@ -195,6 +155,9 @@ packages:
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
     dependencies:
       '@babel/compat-data': 7.20.1
       '@babel/core': 7.20.2
@@ -308,6 +271,9 @@ packages:
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
     dependencies:
       '@babel/helper-plugin-utils': 7.20.2
     dev: false
@@ -317,6 +283,9 @@ packages:
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
     dependencies:
       '@babel/core': 7.20.2
       '@babel/helper-plugin-utils': 7.20.2
@@ -327,6 +296,9 @@ packages:
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
     dependencies:
       '@babel/core': 7.20.2
       '@babel/plugin-transform-react-jsx': 7.19.0_@babel+core@7.20.2
@@ -337,6 +309,9 @@ packages:
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
     dependencies:
       '@babel/core': 7.20.2
       '@babel/helper-plugin-utils': 7.20.2
@@ -347,6 +322,9 @@ packages:
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
     dependencies:
       '@babel/core': 7.20.2
       '@babel/helper-plugin-utils': 7.20.2
@@ -357,6 +335,9 @@ packages:
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
     dependencies:
       '@babel/core': 7.20.2
       '@babel/helper-annotate-as-pure': 7.18.6
@@ -419,6 +400,9 @@ packages:
     resolution: {integrity: sha512-xE7/hyLHJac7D2Ve9dKroBBZqBT7WuPQmWcq7HSGb84sUuP4mlOWoB8dvVfD9yk5DHkU1m6RW7xSoDtnQHNQeA==}
     peerDependencies:
       '@babel/core': ^7.0.0
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
     dependencies:
       '@babel/helper-module-imports': 7.18.6
       '@babel/plugin-syntax-jsx': 7.18.6
@@ -829,6 +813,34 @@ packages:
   /@sinclair/typebox/0.24.51:
     resolution: {integrity: sha512-1P1OROm/rdubP5aFDSZQILU0vrLCJ4fvHt6EoqHEM+2D/G5MK3bIaymUKLit8Js9gbns5UyJnkP/TZROLw4tUA==}
     dev: true
+
+  /@tanstack/react-router/0.0.1-beta.28_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-csaOSKWKHWdE4b/zTefE4dgskQZLoLvkAMaVU1XHki+o5brZyaAx4m5W7DPgxyXS7+wW9GWd/o7anWtD/H1IDQ==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      '@babel/runtime': 7.20.1
+      '@tanstack/router-core': 0.0.1-beta.26_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      use-sync-external-store: 1.2.0_react@18.2.0
+    dev: false
+
+  /@tanstack/router-core/0.0.1-beta.26_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-hVU/qmBtbYChG0kJyjG25aQnnihl5bATYPHs05pWTo8KuvSqK4WerooMBthVTGltg9koGX8dz6a7QNG1kwSJnw==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      '@babel/runtime': 7.20.1
+      history: 5.3.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      tiny-invariant: 1.3.1
+    dev: false
 
   /@testing-library/dom/8.19.0:
     resolution: {integrity: sha512-6YWYPPpxG3e/xOo6HIWwB/58HukkwIVTOaZ0VwdMVjhRUX/01E4FtQbck9GazOOj7MXHc5RBzMrU86iBJHbI+A==}
@@ -1564,8 +1576,8 @@ packages:
     engines: {node: ^12.20.0 || >=14}
     dev: true
 
-  /compute-scroll-into-view/1.0.17:
-    resolution: {integrity: sha512-j4dx+Fb0URmzbwwMUrhqWM2BEWHdFGx+qZ9qqASHRPqvTYdqvWnHg0H1hIbcyLnvgnoNAVMlwkepyqM3DaIFUg==}
+  /compute-scroll-into-view/1.0.20:
+    resolution: {integrity: sha512-UCB0ioiyj8CRjtrvaceBLqqhZCVP+1B8+NWQhmdsm0VXOJtobBCf1dBQmebCCo34qZmUwZfIH2MZLqNHazrfjg==}
     dev: false
 
   /concat-map/0.0.1:
@@ -1751,7 +1763,7 @@ packages:
       react: '>=16.12.0'
     dependencies:
       '@babel/runtime': 7.20.1
-      compute-scroll-into-view: 1.0.17
+      compute-scroll-into-view: 1.0.20
       prop-types: 15.8.1
       react: 18.2.0
       react-is: 17.0.2
@@ -2739,6 +2751,12 @@ packages:
     resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
     hasBin: true
     dev: true
+
+  /history/5.3.0:
+    resolution: {integrity: sha512-ZqaKwjjrAYUYfLG+htGaIIZ4nioX2L70ZUMIFysS3xvBsSG4x/n1V6TXV3N8ZYNuFGlDirFg32T7B6WOUPDYcQ==}
+    dependencies:
+      '@babel/runtime': 7.20.1
+    dev: false
 
   /hoist-non-react-statics/3.3.2:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
@@ -4274,6 +4292,10 @@ packages:
       globrex: 0.1.2
     dev: true
 
+  /tiny-invariant/1.3.1:
+    resolution: {integrity: sha512-AD5ih2NlSssTCwsMznbvwMZpJ1cbhkGd2uueNxzv2jDlEeZdU04JQfRnggJQ8DrcVBGjAsCKwFBbDlVNtEMlzw==}
+    dev: false
+
   /tinybench/2.3.1:
     resolution: {integrity: sha512-hGYWYBMPr7p4g5IarQE7XhlyWveh1EKhy4wUBS1LrHXCKYgvz+4/jCqgmJqZxxldesn05vccrtME2RLLZNW7iA==}
     dev: true
@@ -4430,6 +4452,14 @@ packages:
         optional: true
     dependencies:
       '@types/react': 18.0.25
+      react: 18.2.0
+    dev: false
+
+  /use-sync-external-store/1.2.0_react@18.2.0:
+    resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
       react: 18.2.0
     dev: false
 

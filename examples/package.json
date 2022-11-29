@@ -1,5 +1,5 @@
 {
-  "name": "@react-fzf/example-basic",
+  "name": "@react-fzf/examples",
   "version": "0.0.1",
   "license": "MIT",
   "author": "HiDeoo <github@hideoo.dev> (https://hideoo.dev)",
@@ -10,9 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-router": "0.0.1-beta.28",
+    "downshift": "7.0.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-fzf": "workspace:*"
+    "react-fzf": "workspace:*",
+    "react-select": "5.6.1"
   },
   "devDependencies": {
     "@types/react": "18.0.25",
