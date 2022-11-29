@@ -1,6 +1,6 @@
 import { useCombobox } from 'downshift'
 import { useState } from 'react'
-import { FzfResult, useFzf } from 'react-fzf'
+import { FzfHighlight, useFzf } from 'react-fzf'
 
 const colors = [
   { name: 'aqua' },
@@ -20,29 +20,39 @@ const colors = [
   { name: 'yellow' },
 ]
 
+function colorToString(color: Color | null): string {
+  return color?.name ?? ''
+}
+
 export function WithGenerics() {
-  return <Combobox items={colors} itemToString={(item) => item.name} />
+  return <Combobox items={colors} itemToString={colorToString} />
 }
 
 export function Combobox<TItem>({ items, itemToString }: ComboboxProps<TItem>) {
   const [filter, setFilter] = useState('')
 
-  const results = useFzf({
+  const { getFzfHighlightProps, results } = useFzf({
     items,
     itemToString,
     query: filter,
   })
 
-  const { getInputProps, getItemProps, getLabelProps, getMenuProps, getToggleButtonProps, highlightedIndex, isOpen } =
-    useCombobox({
-      items: results,
-      itemToString(item) {
-        return item ? itemToString(item.item) : ''
-      },
-      onInputValueChange: ({ inputValue }) => {
-        setFilter(inputValue ?? '')
-      },
-    })
+  const {
+    getInputProps,
+    getItemProps,
+    getLabelProps,
+    getMenuProps,
+    getToggleButtonProps,
+    highlightedIndex,
+    isOpen,
+    selectedItem,
+  } = useCombobox({
+    items: results,
+    itemToString,
+    onInputValueChange: ({ inputValue }) => {
+      setFilter(inputValue ?? '')
+    },
+  })
 
   return (
     <fieldset>
@@ -67,15 +77,22 @@ export function Combobox<TItem>({ items, itemToString }: ComboboxProps<TItem>) {
           <legend>output</legend>
           <ul {...getMenuProps()}>
             {isOpen &&
-              results.map((result, index) => (
-                <li
-                  key={`${result.item}${index}`}
-                  style={highlightedIndex === index ? { backgroundColor: 'lightblue' } : {}}
-                  {...getItemProps({ item: result, index })}
-                >
-                  <FzfResult result={result} />
-                </li>
-              ))}
+              results.map((item, index) => {
+                const itemStr = itemToString(item)
+
+                return (
+                  <li
+                    key={`${itemStr}${index}`}
+                    style={{
+                      ...(highlightedIndex === index ? { backgroundColor: 'lightblue' } : {}),
+                      ...(selectedItem === item ? { color: 'red' } : {}),
+                    }}
+                    {...getItemProps({ item, index })}
+                  >
+                    <FzfHighlight {...getFzfHighlightProps({ index, item })} />
+                  </li>
+                )
+              })}
           </ul>
         </fieldset>
       </div>
@@ -85,5 +102,9 @@ export function Combobox<TItem>({ items, itemToString }: ComboboxProps<TItem>) {
 
 interface ComboboxProps<TItem> {
   items: TItem[]
-  itemToString: (item: TItem) => string
+  itemToString: (item: TItem | null) => string
+}
+
+interface Color {
+  name: string
 }

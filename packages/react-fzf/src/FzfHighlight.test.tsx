@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { type ComponentPropsWithoutRef, type ElementType, useState } from 'react'
 import { expect, test } from 'vitest'
 
-import { FzfResult } from './FzfResult'
+import { FzfHighlight } from './FzfHighlight'
 import { useFzf } from './useFzf'
 
 const chemicalElements = [
@@ -22,15 +22,15 @@ const chemicalElements = [
 function Search<TElement extends ElementType>(props: ComponentPropsWithoutRef<TElement>) {
   const [query, setQuery] = useState('')
 
-  const results = useFzf({ items: chemicalElements, query })
+  const { getFzfHighlightProps, results } = useFzf({ items: chemicalElements, query })
 
   return (
     <div>
       <input type="text" placeholder="filter" value={query} onChange={(event) => setQuery(event.target.value)} />
       <ul>
-        {results.map((result) => (
-          <li key={result.item}>
-            <FzfResult result={result} {...props} />
+        {results.map((item, index) => (
+          <li key={item}>
+            <FzfHighlight {...getFzfHighlightProps({ item, index, ...props })} />
           </li>
         ))}
       </ul>

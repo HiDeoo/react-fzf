@@ -2,12 +2,16 @@ import { byLengthAsc, byStartAsc } from 'fzf'
 import { type SyncOptions } from 'fzf/dist/types/types'
 import { assertType, expectTypeOf, test } from 'vitest'
 
-import { useFzf, type UseFzfOptions, type UseFzfResult } from './useFzf'
+import { useFzf, type UseFzfOptions, type UseFzfResults } from './useFzf'
 
 type StringItem = string
 
 interface ObjectItem {
   name: string
+}
+
+function objectToString(item: ObjectItem) {
+  return item.name
 }
 
 test('should always expect a list of items and a query', () => {
@@ -63,66 +67,34 @@ test('should optionally expect the normalize option', () => {
 })
 
 test('should optionally expect the sort option set to false with no tiebreakers', () => {
-  assertType<UseFzfResult<StringItem>[]>(useFzf<StringItem>({ items: [], query: '' }))
-  assertType<UseFzfResult<StringItem>[]>(useFzf<StringItem>({ items: [], query: '', sort: false }))
+  assertType<UseFzfResults<StringItem>>(useFzf<StringItem>({ items: [], query: '' }))
+  assertType<UseFzfResults<StringItem>>(useFzf<StringItem>({ items: [], query: '', sort: false }))
   // @ts-expect-error - should not accept a tiebreaker
   assertType(useFzf<StringItem>({ items: [], query: '', sort: false, tiebreakers: [byLengthAsc, byStartAsc] }))
 
-  assertType<UseFzfResult<ObjectItem>[]>(
-    useFzf<ObjectItem>({
-      items: [],
-      itemToString(item) {
-        return item.name
-      },
-      query: '',
-    })
-  )
-  assertType<UseFzfResult<ObjectItem>[]>(
-    useFzf<ObjectItem>({
-      items: [],
-      itemToString(item) {
-        return item.name
-      },
-      query: '',
-      sort: false,
-    })
+  assertType<UseFzfResults<ObjectItem>>(useFzf<ObjectItem>({ items: [], itemToString: objectToString, query: '' }))
+  assertType<UseFzfResults<ObjectItem>>(
+    useFzf<ObjectItem>({ items: [], itemToString: objectToString, query: '', sort: false })
   )
   // @ts-expect-error - should not accept a tiebreaker
   assertType(useFzf<ObjectItem>({ items: [], query: '', sort: false, tiebreakers: [byLengthAsc, byStartAsc] }))
 })
 
 test('should optionally expect the sort option set to false with an optional tiebreaker', () => {
-  assertType<UseFzfResult<StringItem>[]>(useFzf<StringItem>({ items: [], query: '' }))
-  assertType<UseFzfResult<StringItem>[]>(useFzf<StringItem>({ items: [], query: '', sort: true }))
-  assertType<UseFzfResult<StringItem>[]>(
+  assertType<UseFzfResults<StringItem>>(useFzf<StringItem>({ items: [], query: '' }))
+  assertType<UseFzfResults<StringItem>>(useFzf<StringItem>({ items: [], query: '', sort: true }))
+  assertType<UseFzfResults<StringItem>>(
     useFzf<StringItem>({ items: [], query: '', sort: true, tiebreakers: [byLengthAsc, byStartAsc] })
   )
 
-  assertType<UseFzfResult<ObjectItem>[]>(
-    useFzf<ObjectItem>({
-      items: [],
-      itemToString(item) {
-        return item.name
-      },
-      query: '',
-    })
+  assertType<UseFzfResults<ObjectItem>>(useFzf<ObjectItem>({ items: [], itemToString: objectToString, query: '' }))
+  assertType<UseFzfResults<ObjectItem>>(
+    useFzf<ObjectItem>({ items: [], itemToString: objectToString, query: '', sort: true })
   )
-  assertType<UseFzfResult<ObjectItem>[]>(
+  assertType<UseFzfResults<ObjectItem>>(
     useFzf<ObjectItem>({
       items: [],
-      itemToString(item) {
-        return item.name
-      },
-      query: '',
-      sort: true,
-    })
-  )
-  assertType<UseFzfResult<ObjectItem>[]>(
-    useFzf<ObjectItem>({
-      items: [],
-      itemToString(item) {
-        return item.name
-      },
+      itemToString: objectToString,
       query: '',
       sort: true,
       tiebreakers: [byLengthAsc, byStartAsc],

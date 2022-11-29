@@ -1,6 +1,6 @@
 import { useCombobox } from 'downshift'
 import { useState } from 'react'
-import { FzfResult, useFzf } from 'react-fzf'
+import { FzfHighlight, useFzf } from 'react-fzf'
 
 const colors = [
   'aqua',
@@ -23,18 +23,23 @@ const colors = [
 export function WithStrings() {
   const [filter, setFilter] = useState('')
 
-  const results = useFzf({ items: colors, query: filter })
+  const { getFzfHighlightProps, results } = useFzf({ items: colors, query: filter })
 
-  const { getInputProps, getItemProps, getLabelProps, getMenuProps, getToggleButtonProps, highlightedIndex, isOpen } =
-    useCombobox({
-      items: results,
-      itemToString(item) {
-        return item?.item ?? ''
-      },
-      onInputValueChange: ({ inputValue }) => {
-        setFilter(inputValue ?? '')
-      },
-    })
+  const {
+    getInputProps,
+    getItemProps,
+    getLabelProps,
+    getMenuProps,
+    getToggleButtonProps,
+    highlightedIndex,
+    isOpen,
+    selectedItem,
+  } = useCombobox({
+    items: results,
+    onInputValueChange: ({ inputValue }) => {
+      setFilter(inputValue ?? '')
+    },
+  })
 
   return (
     <fieldset>
@@ -59,13 +64,16 @@ export function WithStrings() {
           <legend>output</legend>
           <ul {...getMenuProps()}>
             {isOpen &&
-              results.map((result, index) => (
+              results.map((item, index) => (
                 <li
-                  key={`${result.item}${index}`}
-                  style={highlightedIndex === index ? { backgroundColor: 'lightblue' } : {}}
-                  {...getItemProps({ item: result, index })}
+                  key={`${item}${index}`}
+                  style={{
+                    ...(highlightedIndex === index ? { backgroundColor: 'lightblue' } : {}),
+                    ...(selectedItem === item ? { color: 'red' } : {}),
+                  }}
+                  {...getItemProps({ item, index })}
                 >
-                  <FzfResult result={result} />
+                  <FzfHighlight {...getFzfHighlightProps({ index, item })} />
                 </li>
               ))}
           </ul>

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { basicMatch, byLengthAsc, extendedMatch, type UseFzfOptions, FzfResult, useFzf } from 'react-fzf'
+import { basicMatch, byLengthAsc, extendedMatch, type UseFzfOptions, FzfHighlight, useFzf } from 'react-fzf'
 
 const names = [
   'Samuel Galloway',
@@ -33,7 +33,7 @@ export function WithOptions() {
   const [sort, setSort] = useState(true)
   const [useExtendedMatch, setUseExtendedMatch] = useState(false)
 
-  const results = useFzf({
+  const { getFzfHighlightProps, results } = useFzf({
     casing,
     forward,
     fuzzy,
@@ -125,9 +125,9 @@ export function WithOptions() {
         <fieldset>
           <legend>output</legend>
           <ul>
-            {results.map((result) => (
-              <li key={result.item}>
-                <FzfResult result={result} />
+            {results.map((item, index) => (
+              <li key={item}>
+                <FzfHighlight {...getFzfHighlightProps({ index, item })} />
               </li>
             ))}
           </ul>

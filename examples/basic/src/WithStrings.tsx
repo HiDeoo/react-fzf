@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FzfResult, useFzf } from 'react-fzf'
+import { FzfHighlight, useFzf } from 'react-fzf'
 
 const colors = [
   'aqua',
@@ -22,7 +22,7 @@ const colors = [
 export function WithStrings() {
   const [filter, setFilter] = useState('')
 
-  const results = useFzf({ items: colors, query: filter })
+  const { getFzfHighlightProps, results } = useFzf({ items: colors, query: filter })
 
   return (
     <fieldset>
@@ -43,9 +43,9 @@ export function WithStrings() {
         <fieldset>
           <legend>output</legend>
           <ul>
-            {results.map((result) => (
-              <li key={result.item}>
-                <FzfResult result={result} />
+            {results.map((item, index) => (
+              <li key={item}>
+                <FzfHighlight {...getFzfHighlightProps({ index, item })} />
               </li>
             ))}
           </ul>
