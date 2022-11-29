@@ -21,7 +21,7 @@ function nameToLastname(name: string) {
 }
 
 export function WithOptions() {
-  const [filter, setFilter] = useState('')
+  const [query, setQuery] = useState('')
 
   const [casing, setCasing] = useState<Casing>('smart-case')
   const [forward, setForward] = useState(true)
@@ -42,7 +42,7 @@ export function WithOptions() {
     limit,
     match: useExtendedMatch ? extendedMatch : basicMatch,
     normalize,
-    query: filter,
+    query,
     sort,
     tiebreakers: lengthTiebreaker ? [byLengthAsc] : [],
   })
@@ -52,7 +52,7 @@ export function WithOptions() {
       <legend>with options</legend>
       <label>
         query:
-        <input type="text" placeholder="filter…" value={filter} onChange={(event) => setFilter(event.target.value)} />
+        <input type="text" placeholder="filter…" value={query} onChange={(event) => setQuery(event.target.value)} />
       </label>
       <label>
         limit:

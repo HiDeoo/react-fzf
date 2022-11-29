@@ -29,12 +29,12 @@ export function WithGenerics() {
 }
 
 export function Combobox<TItem>({ items, itemToString }: ComboboxProps<TItem>) {
-  const [filter, setFilter] = useState('')
+  const [query, setQuery] = useState('')
 
   const { getFzfHighlightProps, results } = useFzf({
     items,
     itemToString,
-    query: filter,
+    query,
   })
 
   const {
@@ -50,7 +50,7 @@ export function Combobox<TItem>({ items, itemToString }: ComboboxProps<TItem>) {
     items: results,
     itemToString,
     onInputValueChange: ({ inputValue }) => {
-      setFilter(inputValue ?? '')
+      setQuery(inputValue ?? '')
     },
   })
 

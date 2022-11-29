@@ -21,9 +21,9 @@ const colors = [
 ]
 
 export function WithStrings() {
-  const [filter, setFilter] = useState('')
+  const [query, setQuery] = useState('')
 
-  const { getFzfHighlightProps, results } = useFzf({ items: colors, query: filter })
+  const { getFzfHighlightProps, results } = useFzf({ items: colors, query })
 
   const {
     getInputProps,
@@ -37,7 +37,7 @@ export function WithStrings() {
   } = useCombobox({
     items: results,
     onInputValueChange: ({ inputValue }) => {
-      setFilter(inputValue ?? '')
+      setQuery(inputValue ?? '')
     },
   })
 

@@ -25,12 +25,12 @@ function colorToString(color: Color | null): string {
 }
 
 export function WithObjects() {
-  const [filter, setFilter] = useState('')
+  const [query, setQuery] = useState('')
 
   const { getFzfHighlightProps, results } = useFzf({
     items: colors,
     itemToString: colorToString,
-    query: filter,
+    query,
   })
 
   const {
@@ -46,7 +46,7 @@ export function WithObjects() {
     items: results,
     itemToString: colorToString,
     onInputValueChange: ({ inputValue }) => {
-      setFilter(inputValue ?? '')
+      setQuery(inputValue ?? '')
     },
   })
 

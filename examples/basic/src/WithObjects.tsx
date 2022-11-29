@@ -20,14 +20,14 @@ const colors = [
 ]
 
 export function WithObjects() {
-  const [filter, setFilter] = useState('')
+  const [query, setQuery] = useState('')
 
   const { getFzfHighlightProps, results } = useFzf({
     items: colors,
     itemToString(item) {
       return item.name
     },
-    query: filter,
+    query,
   })
 
   return (
@@ -35,7 +35,7 @@ export function WithObjects() {
       <legend>with objects</legend>
       <label>
         query:
-        <input type="text" placeholder="filter…" value={filter} onChange={(event) => setFilter(event.target.value)} />
+        <input type="text" placeholder="filter…" value={query} onChange={(event) => setQuery(event.target.value)} />
       </label>
       <div className="example">
         <fieldset>

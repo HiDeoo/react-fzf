@@ -20,16 +20,16 @@ const colors = [
 ]
 
 export function WithStrings() {
-  const [filter, setFilter] = useState('')
+  const [query, setQuery] = useState('')
 
-  const { getFzfHighlightProps, results } = useFzf({ items: colors, query: filter })
+  const { getFzfHighlightProps, results } = useFzf({ items: colors, query })
 
   return (
     <fieldset>
       <legend>with strings</legend>
       <label>
         query:
-        <input type="text" placeholder="filter…" value={filter} onChange={(event) => setFilter(event.target.value)} />
+        <input type="text" placeholder="filter…" value={query} onChange={(event) => setQuery(event.target.value)} />
       </label>
       <div className="example">
         <fieldset>
