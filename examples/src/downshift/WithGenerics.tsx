@@ -2,32 +2,15 @@ import { useCombobox } from 'downshift'
 import { useState } from 'react'
 import { FzfHighlight, useFzf } from 'react-fzf'
 
+import { posts } from '../utils/data'
 import { Example } from '../utils/Example'
 
-const colors = [
-  { name: 'aqua' },
-  { name: 'black' },
-  { name: 'blue' },
-  { name: 'fushsia' },
-  { name: 'gray' },
-  { name: 'green' },
-  { name: 'lime' },
-  { name: 'maroon' },
-  { name: 'navy' },
-  { name: 'olive' },
-  { name: 'red' },
-  { name: 'silver' },
-  { name: 'teal' },
-  { name: 'white' },
-  { name: 'yellow' },
-]
-
-function colorToString(color: Color | null): string {
-  return color?.name ?? ''
+function postToString(post: typeof posts[number] | null): string {
+  return post?.title ?? ''
 }
 
 export function WithGenerics() {
-  return <Combobox items={colors} itemToString={colorToString} />
+  return <Combobox items={posts} itemToString={postToString} />
 }
 
 export function Combobox<TItem>({ items, itemToString }: ComboboxProps<TItem>) {
@@ -60,8 +43,8 @@ export function Combobox<TItem>({ items, itemToString }: ComboboxProps<TItem>) {
     <Example title="with generics">
       <Example.Input>
         <ul>
-          {colors.map((color) => (
-            <li key={color.name}>{JSON.stringify(color)}</li>
+          {posts.map((post) => (
+            <li key={post.title}>{JSON.stringify(post)}</li>
           ))}
         </ul>
       </Example.Input>
@@ -100,8 +83,4 @@ export function Combobox<TItem>({ items, itemToString }: ComboboxProps<TItem>) {
 interface ComboboxProps<TItem> {
   items: TItem[]
   itemToString: (item: TItem | null) => string
-}
-
-interface Color {
-  name: string
 }

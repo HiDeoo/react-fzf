@@ -1,25 +1,8 @@
 import { useState } from 'react'
 import { FzfHighlight, useFzf } from 'react-fzf'
 
+import { colors } from '../utils/data'
 import { Example } from '../utils/Example'
-
-const colors = [
-  'aqua',
-  'black',
-  'blue',
-  'fushsia',
-  'gray',
-  'green',
-  'lime',
-  'maroon',
-  'navy',
-  'olive',
-  'red',
-  'silver',
-  'teal',
-  'white',
-  'yellow',
-]
 
 export function WithStrings() {
   const [query, setQuery] = useState('')

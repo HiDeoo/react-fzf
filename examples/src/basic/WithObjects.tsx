@@ -1,33 +1,16 @@
 import { useState } from 'react'
 import { FzfHighlight, useFzf } from 'react-fzf'
 
+import { posts } from '../utils/data'
 import { Example } from '../utils/Example'
-
-const colors = [
-  { name: 'aqua' },
-  { name: 'black' },
-  { name: 'blue' },
-  { name: 'fushsia' },
-  { name: 'gray' },
-  { name: 'green' },
-  { name: 'lime' },
-  { name: 'maroon' },
-  { name: 'navy' },
-  { name: 'olive' },
-  { name: 'red' },
-  { name: 'silver' },
-  { name: 'teal' },
-  { name: 'white' },
-  { name: 'yellow' },
-]
 
 export function WithObjects() {
   const [query, setQuery] = useState('')
 
   const { getFzfHighlightProps, results } = useFzf({
-    items: colors,
+    items: posts,
     itemToString(item) {
-      return item.name
+      return item.title
     },
     query,
   })
@@ -44,15 +27,15 @@ export function WithObjects() {
     >
       <Example.Input>
         <ul>
-          {colors.map((color) => (
-            <li key={color.name}>{JSON.stringify(color)}</li>
+          {posts.map((post) => (
+            <li key={post.title}>{JSON.stringify(post)}</li>
           ))}
         </ul>
       </Example.Input>
       <Example.Output>
         <ul>
           {results.map((item, index) => (
-            <li key={item.name}>
+            <li key={item.title}>
               <FzfHighlight {...getFzfHighlightProps({ index, item })} />
             </li>
           ))}

@@ -1,22 +1,8 @@
 import { useState } from 'react'
 import { basicMatch, byLengthAsc, extendedMatch, type UseFzfOptions, FzfHighlight, useFzf } from 'react-fzf'
 
+import { names } from '../utils/data'
 import { Example } from '../utils/Example'
-
-const names = [
-  'Samuel Galloway',
-  'Nathanael Sawyer',
-  'Nichola Stark',
-  'Sabah Reeve',
-  'Aleksander Nieves',
-  'Ansh Corrigan',
-  'Ellesha Mcdermott',
-  'Terrence Reid',
-  'Zakk Krueger',
-  'Zoë Everett',
-  'Rupert Knight',
-  'Fenella Doyle',
-]
 
 function nameToLastname(name: string) {
   return name.split(' ')[1] ?? ''

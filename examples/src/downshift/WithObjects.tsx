@@ -2,36 +2,19 @@ import { useCombobox } from 'downshift'
 import { useState } from 'react'
 import { FzfHighlight, useFzf } from 'react-fzf'
 
+import { posts } from '../utils/data'
 import { Example } from '../utils/Example'
 
-const colors = [
-  { name: 'aqua' },
-  { name: 'black' },
-  { name: 'blue' },
-  { name: 'fushsia' },
-  { name: 'gray' },
-  { name: 'green' },
-  { name: 'lime' },
-  { name: 'maroon' },
-  { name: 'navy' },
-  { name: 'olive' },
-  { name: 'red' },
-  { name: 'silver' },
-  { name: 'teal' },
-  { name: 'white' },
-  { name: 'yellow' },
-]
-
-function colorToString(color: Color | null): string {
-  return color?.name ?? ''
+function postToString(post: typeof posts[number] | null): string {
+  return post?.title ?? ''
 }
 
 export function WithObjects() {
   const [query, setQuery] = useState('')
 
   const { getFzfHighlightProps, results } = useFzf({
-    items: colors,
-    itemToString: colorToString,
+    items: posts,
+    itemToString: postToString,
     query,
   })
 
@@ -46,7 +29,7 @@ export function WithObjects() {
     selectedItem,
   } = useCombobox({
     items: results,
-    itemToString: colorToString,
+    itemToString: postToString,
     onInputValueChange: ({ inputValue }) => {
       setQuery(inputValue ?? '')
     },
@@ -56,8 +39,8 @@ export function WithObjects() {
     <Example title="with objects">
       <Example.Input>
         <ul>
-          {colors.map((color) => (
-            <li key={color.name}>{JSON.stringify(color)}</li>
+          {posts.map((post) => (
+            <li key={post.title}>{JSON.stringify(post)}</li>
           ))}
         </ul>
       </Example.Input>
@@ -73,7 +56,7 @@ export function WithObjects() {
           {isOpen &&
             results.map((item, index) => (
               <li
-                key={`${item.name}${index}`}
+                key={item.id}
                 style={{
                   ...(highlightedIndex === index ? { backgroundColor: 'lightblue' } : {}),
                   ...(selectedItem === item ? { color: 'red' } : {}),
@@ -87,8 +70,4 @@ export function WithObjects() {
       </Example.Output>
     </Example>
   )
-}
-
-interface Color {
-  name: string
 }
