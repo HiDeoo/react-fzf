@@ -1,0 +1,54 @@
+{
+  "name": "@react-fzf/monorepo",
+  "version": "0.0.1",
+  "license": "MIT",
+  "description": "A tiny headless React fzf wrapper",
+  "author": "HiDeoo <github@hideoo.dev> (https://hideoo.dev)",
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --parallel --filter \"@react-fzf/examples...\" dev",
+    "lint": "prettier -c . && eslint . --cache --max-warnings=0 && tsc --noEmit",
+    "test": "pnpm -r test -- --run",
+    "typecheck": "pnpm -r typecheck --run",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@hideoo/eslint-config": "0.13.0",
+    "@hideoo/prettier-config": "0.1.1",
+    "@hideoo/tsconfig": "0.1.0",
+    "eslint": "8.28.0",
+    "eslint-plugin-testing-library": "5.9.1",
+    "husky": "8.0.2",
+    "lint-staged": "13.0.3",
+    "prettier": "2.8.0",
+    "typescript": "4.9.3"
+  },
+  "packageManager": "pnpm@7.17.0",
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "@babel/core"
+      ]
+    }
+  },
+  "private": true,
+  "sideEffects": false,
+  "keywords": [
+    "react",
+    "fzf",
+    "wrapper",
+    "fuzzy-matching",
+    "highlight"
+  ],
+  "homepage": "https://github.com/HiDeoo/react-fzf",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HiDeoo/react-fzf.git"
+  },
+  "bugs": "https://github.com/HiDeoo/react-fzf/issues",
+  "prettier": "@hideoo/prettier-config",
+  "lint-staged": {
+    "**/*": "prettier -w -u --cache",
+    "**/*.{js,jsx,ts,tsx,cjs,mjs}": "eslint --cache --max-warnings=0"
+  }
+}

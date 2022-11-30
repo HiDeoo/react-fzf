@@ -1,0 +1,6 @@
+{
+  "extends": "@hideoo/tsconfig",
+  "compilerOptions": {
+    "exactOptionalPropertyTypes": false
+  }
+}

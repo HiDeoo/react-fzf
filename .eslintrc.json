@@ -1,0 +1,3 @@
+{
+  "extends": ["@hideoo", "plugin:testing-library/react"]
+}

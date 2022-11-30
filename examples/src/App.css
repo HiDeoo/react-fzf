@@ -1,0 +1,26 @@
+header {
+  display: flex;
+  gap: 0.5rem;
+}
+
+fieldset {
+  margin-top: 0.5rem;
+}
+
+.example {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+input,
+select {
+  margin-inline: 0.3rem 0.8rem;
+  position: relative;
+}
+
+.menu {
+  background-color: lightgray;
+  list-style-type: none;
+  padding: 0;
+  position: absolute;
+}

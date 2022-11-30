@@ -1,0 +1,44 @@
+{
+  "name": "@react-fzf/examples",
+  "version": "0.0.1",
+  "license": "MIT",
+  "description": "A tiny headless React fzf wrapper",
+  "author": "HiDeoo <github@hideoo.dev> (https://hideoo.dev)",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@tanstack/react-router": "0.0.1-beta.28",
+    "downshift": "7.0.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-fzf": "workspace:*",
+    "react-select": "5.6.1"
+  },
+  "devDependencies": {
+    "@types/react": "18.0.25",
+    "@types/react-dom": "18.0.9",
+    "@vitejs/plugin-react": "2.2.0",
+    "typescript": "4.9.3",
+    "vite": "3.2.4"
+  },
+  "packageManager": "pnpm@7.17.0",
+  "private": true,
+  "sideEffects": false,
+  "keywords": [
+    "react",
+    "fzf",
+    "wrapper",
+    "fuzzy-matching",
+    "highlight"
+  ],
+  "homepage": "https://github.com/HiDeoo/react-fzf",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HiDeoo/react-fzf.git"
+  },
+  "bugs": "https://github.com/HiDeoo/react-fzf/issues"
+}
