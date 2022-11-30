@@ -18,7 +18,8 @@
     "dev": "vite build --watch",
     "build": "tsc && vite build",
     "test": "vitest",
-    "typecheck": "vitest typecheck"
+    "typecheck": "vitest typecheck",
+    "prepublishOnly": "pnpm build"
   },
   "dependencies": {
     "fzf": "0.5.1"

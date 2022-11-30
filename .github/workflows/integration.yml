@@ -45,6 +45,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Build packages
+        working-directory: packages/react-fzf
+        run: pnpm build
+
       - name: Lint
         run: pnpm lint
 
