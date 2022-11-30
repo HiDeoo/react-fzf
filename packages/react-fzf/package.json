@@ -2,7 +2,7 @@
   "name": "react-fzf",
   "version": "0.0.1",
   "license": "MIT",
-  "description": "",
+  "description": "A tiny headless React fzf wrapper",
   "author": "HiDeoo <github@hideoo.dev> (https://hideoo.dev)",
   "type": "module",
   "main": "./dist/react-fzf.umd.cjs",
@@ -47,7 +47,13 @@
   "files": [
     "dist"
   ],
-  "keywords": [],
+  "keywords": [
+    "react",
+    "fzf",
+    "wrapper",
+    "fuzzy-matching",
+    "highlight"
+  ],
   "homepage": "https://github.com/HiDeoo/react-fzf",
   "repository": {
     "type": "git",

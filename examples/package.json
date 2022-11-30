@@ -2,6 +2,7 @@
   "name": "@react-fzf/examples",
   "version": "0.0.1",
   "license": "MIT",
+  "description": "A tiny headless React fzf wrapper",
   "author": "HiDeoo <github@hideoo.dev> (https://hideoo.dev)",
   "type": "module",
   "scripts": {
@@ -27,6 +28,13 @@
   "packageManager": "pnpm@7.17.0",
   "private": true,
   "sideEffects": false,
+  "keywords": [
+    "react",
+    "fzf",
+    "wrapper",
+    "fuzzy-matching",
+    "highlight"
+  ],
   "homepage": "https://github.com/HiDeoo/react-fzf",
   "repository": {
     "type": "git",
