@@ -53,15 +53,15 @@ export function Example() {
 Before diving into the documentation, you can visit this [codesandbox.io demo](https://codesandbox.io/p/sandbox/react-fzf-demo-x5wr61) or check out the various examples provided in this repository. To run them locally, you can use the `pnpm dev` command and open the URL from the output (usually `http://localhost:5173`) in your browser.
 
 - React only examples:
-  - [Example with string items](examples/src/basic/WithStrings.tsx)
-  - [Example with object items](examples/src/basic/WithObjects.tsx)
-  - [Example with various fzf options](examples/src/basic/WithOptions.tsx)
+  - [Example with string items](/examples/src/basic/WithStrings.tsx)
+  - [Example with object items](/examples/src/basic/WithObjects.tsx)
+  - [Example with various fzf options](/examples/src/basic/WithOptions.tsx)
 - [Downshift](https://www.downshift-js.com) combobox/autocomplete dropdown examples:
-  - [Example with string items](examples/src/downshift/WithStrings.tsx)
-  - [Example with object items](examples/src/downshift/WithObjects.tsx)
-  - [Example with generic items](examples/src/downshift/WithGenerics.tsx)
+  - [Example with string items](/examples/src/downshift/WithStrings.tsx)
+  - [Example with object items](/examples/src/downshift/WithObjects.tsx)
+  - [Example with generic items](/examples/src/downshift/WithGenerics.tsx)
 - [React Select](https://react-select.com) examples:
-  - [Example with string values](examples/src/react-select/WithValues.tsx)
+  - [Example with string values](/examples/src/react-select/WithValues.tsx)
 
 ## Documentation
 
