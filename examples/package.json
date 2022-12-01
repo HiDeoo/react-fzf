@@ -1,6 +1,6 @@
 {
   "name": "@react-fzf/examples",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "description": "A tiny headless React fzf wrapper",
   "author": "HiDeoo <github@hideoo.dev> (https://hideoo.dev)",
