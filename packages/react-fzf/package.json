@@ -43,7 +43,7 @@
   "peerDependencies": {
     "react": ">=16"
   },
-  "packageManager": "pnpm@7.17.0",
+  "packageManager": "pnpm@10.18.3",
   "sideEffects": false,
   "files": [
     "dist"
